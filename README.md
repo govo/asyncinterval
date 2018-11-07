@@ -4,11 +4,13 @@
 ```js
 const Asyncinterval = require('asyncinterval')
 
-//create an asyncintervalObject object
+//Create an asyncintervalObject object
 let interval = new Asyncinterval(async func,options);
-//start the interval
+
+//Start the interval
 interval.start(delay=0);
-//stop the interval;
+
+//Stop the interval;
 await interval.stop(wait=false);
 
 ```
@@ -26,31 +28,36 @@ await interval.stop(wait=false);
 
 ### Example:
 ```js
-const Asyncinterval = require('asyncinterval')
+const Asyncinterval = require('./index')
 
 let options = {
-    time:500,
-    name:"mytester",
-    timeout:5000,
-    timeoutCallback:()=>{
+    time: 500,
+    name: "mytester",
+    timeout: 5000,
+    timeoutCallback: () => {
         console.log("timeout!!");
         //to something
     },
-    log:"info"
+    log: "info"
 }
 
-let job = ()=>{
+let job = () => {
     return new Promise(resolve => {
         //job example
-        setTimeout(()=>{
-            console.info("myScheduleTest")
+        setTimeout(() => {
+            console.info("Asyncinterval job run finished")
             resolve(1)
-        },4000);
+        }, 6000);
     })
 }
 
-let myInterval=new Asyncinterval(job,options);
+let myInterval = new Asyncinterval(job, options);
 
 myInterval.start(100);
+
+// stop() test here:
+// setTimeout(async ()=>{
+//     console.log(await myInterval.stop(true));
+// },2000);
 
 ```
