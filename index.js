@@ -24,9 +24,12 @@ class MySchedule{
         this._jobInterval = null;
         this._timeoutInterval = null;
         this._timeCounter = 0;
+        this._isRunning = false;
     }
     start(delay=0){
-        this.stop();
+        if(this._isRunning){
+            clearTimeout(this._jobInterval);
+        }
         this._isStop = false;
         if(delay){
             setTimeout(()=>{
@@ -37,10 +40,21 @@ class MySchedule{
         }
         return this;
     }
-    stop(){
+    async stop(wait){
+        console.log("stop job",this.name,this._isRunning);
         this._isStop = true;
         clearTimeout(this._jobInterval);
-        return this;
+        if(wait && this._isRunning){
+            return new Promise((resolve)=>{
+                let i = setInterval(()=>{
+                    if(!this._isRunning) {
+                        resolve(true);
+                        clearInterval(i);
+                    }
+                },10);
+            })
+        }
+        return true;
     }
     async _action(){
         if(this._isStop) return;
@@ -56,15 +70,18 @@ class MySchedule{
                     "at counter:",timeCounter,
                     ". force start new job now.");
                 }
+                this._isRunning = false;
                 this._action().then(()=>{}).catch(()=>{});
             },this.timeout);
         }
 
+        this._isRunning = true;
         try{
             await this.job();
         }catch (e) {
             if(this.log==INFO) console.error("job fail ",this.name,":",e)
         }
+        this._isRunning = false;
 
         if(this.log==INFO) console.log("auto job " + this.name + ":" ,Date.now()-start,"ms at counter",timeCounter);
 

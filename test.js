@@ -1,20 +1,30 @@
-const MySchedule = require('./index')
+const Asyncinterval = require('./index')
 
-let myScheduleTest=new MySchedule(async ()=>{
-    return new Promise(resolve => {
-        setTimeout(()=>{
-            // console.info("myScheduleTest")
-            resolve(1)
-        },4000);
-    })
-},{
+let options = {
     time:500,
     name:"mytester",
     timeout:5000,
     timeoutCallback:()=>{
-        console.log("timeout!!")
+        console.log("timeout!!");
+        //to something
     },
     log:"info"
-});
+}
 
-myScheduleTest.start(0)
+let job = ()=>{
+    return new Promise(resolve => {
+        //job example
+        setTimeout(()=>{
+            console.info("Asyncinterval job run finished")
+            resolve(1)
+        },6000);
+    })
+}
+
+let myInterval=new Asyncinterval(job,options);
+
+myInterval.start(100);
+
+// setTimeout(async ()=>{
+//     console.log(await myInterval.stop(true));
+// },2000);
