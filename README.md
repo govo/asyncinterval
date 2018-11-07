@@ -1,8 +1,8 @@
-# asyncinterval
+# asyncinterval2
 
 ### How to use:
 ```js
-const Asyncinterval = require('asyncinterval')
+const Asyncinterval = require('asyncinterval2')
 
 //Create an asyncintervalObject object
 let interval = new Asyncinterval(async func,options);
@@ -28,7 +28,7 @@ await interval.stop(wait);
 
 ### Example:
 ```js
-const Asyncinterval = require('./index')
+const Asyncinterval = require('asyncinterval2')
 
 let options = {
     time: 500,
