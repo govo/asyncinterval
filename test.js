@@ -1,27 +1,27 @@
 const Asyncinterval = require('./index')
 
 let options = {
-    time:500,
-    name:"mytester",
-    timeout:5000,
-    timeoutCallback:()=>{
+    time: 500,
+    name: "mytester",
+    timeout: 5000,
+    timeoutCallback: () => {
         console.log("timeout!!");
         //to something
     },
-    log:"info"
+    log: "info"
 }
 
-let job = ()=>{
+let job = () => {
     return new Promise(resolve => {
         //job example
-        setTimeout(()=>{
+        setTimeout(() => {
             console.info("Asyncinterval job run finished")
             resolve(1)
-        },6000);
+        }, 6000);
     })
 }
 
-let myInterval=new Asyncinterval(job,options);
+let myInterval = new Asyncinterval(job, options);
 
 myInterval.start(100);
 
