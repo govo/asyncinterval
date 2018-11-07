@@ -8,10 +8,10 @@ const Asyncinterval = require('asyncinterval')
 let interval = new Asyncinterval(async func,options);
 
 //Start the interval
-interval.start(delay=0);
+interval.start(delay);
 
 //Stop the interval;
-await interval.stop(wait=false);
+await interval.stop(wait);
 
 ```
 ### Params:
