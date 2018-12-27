@@ -1,6 +1,6 @@
 {
   "name": "asyncinterval2",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "better interval for nodejs",
   "main": "index.js",
   "scripts": {
