@@ -39,10 +39,10 @@ class MySchedule {
         this._isStop = false;
         if (delay) {
             setTimeout(() => {
-                this._action().then(() => {}).catch((e) => {});
+                this._action().then(() => { }).catch((e) => { });
             }, delay)
         } else {
-            this._action().then(() => {}).catch((e) => {});
+            this._action().then(() => { }).catch((e) => { });
         }
         return this;
     }
@@ -77,7 +77,7 @@ class MySchedule {
                         ". force start new job now.");
                 }
                 this._isRunning = false;
-                this._action().then(() => {}).catch(() => {});
+                this._action().then(() => { }).catch(() => { });
             }, this.timeout);
         }
 
@@ -93,11 +93,10 @@ class MySchedule {
 
         if (timeCounter != this._timeCounter) return; //exit if timeout called
 
-
         clearTimeout(this._timeoutInterval);
 
         this._jobInterval = setTimeout(() => {
-            this._action().then(() => {}).catch(() => {});
+            this._action().then(() => { }).catch(() => { });
         }, this.time)
     }
 }
