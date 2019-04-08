@@ -22,7 +22,7 @@ class MySchedule {
       timeoutCallback
     } = options
     this.log = log || NONE
-    this.timeout = timeout || 5000 //超时时间
+    this.timeout = timeout || 0 //超时时间
     this.name = name || null
     this.time = time || 100
     this.job = job
@@ -86,7 +86,7 @@ class MySchedule {
     try {
       await this.job()
     } catch (e) {
-      if (this.log == INFO) console.error("job fail ", this.name, ":", e)
+      if (this.log == ERROR || this.log == INFO) console.error("job fail ", this.name, ":", e)
     }
     this._isRunning = false
 
@@ -95,7 +95,7 @@ class MySchedule {
     if (timeCounter != this._timeCounter) return //exit if timeout called
 
     clearTimeout(this._timeoutInterval)
-
+    clearTimeout(this._jobInterval)
     this._jobInterval = setTimeout(() => {
       this._action().then(() => { }).catch(() => { })
     }, this.time)

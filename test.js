@@ -17,7 +17,7 @@ let job = () => {
         setTimeout(() => {
             console.info("Asyncinterval job run finished")
             resolve(1)
-        }, 6000);
+        }, 2000);
     })
 }
 
